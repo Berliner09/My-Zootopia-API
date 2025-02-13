@@ -2,7 +2,7 @@ import json
 
 
 def load_data(file_path):
-    """Lädt eine JSON-Datei"""
+    """Lädt eine JSON-Datei."""
     with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
@@ -29,10 +29,10 @@ def print_animal_info(data):
         print()  # Leerzeile zur Trennung
 
 
-def generate_animals_output(data):
+def serialize_animal(animal_obj):
     """
-    Generiert einen HTML-formatierten String, in dem für jedes Tier ein Listenelement
-    erzeugt wird, das wie folgt strukturiert ist:
+    Serialisiert ein einzelnes Tier-Objekt in ein HTML-Listenelement.
+    Das Format entspricht:
 
     <li class="cards__item">
       <div class="card__title">{Name}</div>
@@ -43,26 +43,30 @@ def generate_animals_output(data):
       </p>
     </li>
     """
-    output = ""
+    output = ''
+    output += '<li class="cards__item">\n'
+    if 'name' in animal_obj:
+        output += f'  <div class="card__title">{animal_obj["name"]}</div>\n'
+    output += '  <p class="card__text">\n'
+    if 'characteristics' in animal_obj and 'diet' in animal_obj['characteristics']:
+        output += f'      <strong>Diet:</strong> {animal_obj["characteristics"]["diet"]}<br/>\n'
+    if 'locations' in animal_obj and isinstance(animal_obj['locations'], list) and animal_obj['locations']:
+        output += f'      <strong>Location:</strong> {animal_obj["locations"][0]}<br/>\n'
+    if 'characteristics' in animal_obj and 'type' in animal_obj['characteristics']:
+        output += f'      <strong>Type:</strong> {animal_obj["characteristics"]["type"]}<br/>\n'
+    output += '  </p>\n'
+    output += '</li>\n'
+    return output
+
+
+def generate_animals_output(data):
+    """
+    Generiert einen HTML-formatierten String, indem für jedes Tier die Funktion
+    serialize_animal() aufgerufen wird.
+    """
+    output = ''
     for animal in data:
-        output += '<li class="cards__item">\n'
-        # Name als Titel
-        if 'name' in animal:
-            output += f'  <div class="card__title">{animal["name"]}</div>\n'
-        # Beginne den Text-Block
-        output += '  <p class="card__text">\n'
-        # Diet aus characteristics
-        if 'characteristics' in animal and 'diet' in animal['characteristics']:
-            output += f'      <strong>Diet:</strong> {animal["characteristics"]["diet"]}<br/>\n'
-        # Location (erster Eintrag)
-        if 'locations' in animal and isinstance(animal['locations'], list) and animal['locations']:
-            output += f'      <strong>Location:</strong> {animal["locations"][0]}<br/>\n'
-        # Type aus characteristics
-        if 'characteristics' in animal and 'type' in animal['characteristics']:
-            output += f'      <strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n'
-        # Text-Block beenden
-        output += '  </p>\n'
-        output += '</li>\n'
+        output += serialize_animal(animal)
     return output
 
 
@@ -85,10 +89,10 @@ if __name__ == '__main__':
     # JSON-Daten laden
     animals_data = load_data('animals_data.json')
 
-    # Optional: Rohdaten in der Konsole ausgeben
+    # Optionale Ausgabe der rohen Daten in der Konsole
     print_animal_info(animals_data)
 
-    # HTML-Code für jedes Tier generieren (als "card")
+    # HTML-Code für jedes Tier generieren
     animals_info = generate_animals_output(animals_data)
 
     # Template einlesen, Platzhalter ersetzen und neue HTML-Datei erzeugen
