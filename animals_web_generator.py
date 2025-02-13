@@ -9,41 +9,49 @@ def load_data(file_path):
 
 def print_animal_info(data):
     """
-    Gibt für jedes Tier in den Daten folgende Informationen aus (falls vorhanden):
+    Gibt die Tierinformationen (unformatiert) in der Konsole aus.
+    Dabei werden, falls vorhanden, folgende Felder angezeigt:
       - Name
-      - Diet
-      - Der erste Eintrag aus der Liste 'locations'
-      - Type
+      - Diet (aus characteristics)
+      - Type (aus characteristics)
+      - Der erste Eintrag der locations-Liste
     """
     for animal in data:
         if 'name' in animal:
             print(f"Name: {animal['name']}")
-        if 'diet' in animal:
-            print(f"Diet: {animal['diet']}")
+        if 'characteristics' in animal:
+            if 'diet' in animal['characteristics']:
+                print(f"Diet: {animal['characteristics']['diet']}")
+            if 'type' in animal['characteristics']:
+                print(f"Type: {animal['characteristics']['type']}")
         if 'locations' in animal and isinstance(animal['locations'], list) and animal['locations']:
             print(f"Location: {animal['locations'][0]}")
-        if 'type' in animal:
-            print(f"Type: {animal['type']}")
         print()  # Leerzeile zur Trennung
 
 
 def generate_animals_output(data):
     """
-    Generiert einen String mit den Informationen der Tiere, wobei für jedes Tier:
-      - Name, Diet, erster Location-Eintrag und Type (falls vorhanden)
-      - mit Zeilenumbrüchen formatiert
+    Generiert einen HTML-formatierten String, in dem für jedes Tier ein Listenelement erzeugt wird.
+    Folgende Felder werden (falls vorhanden) ausgegeben:
+      - Name
+      - Diet (aus characteristics)
+      - Type (aus characteristics)
+      - Der erste Eintrag der locations-Liste
+    jeder Wert endet mit einem <br/>-Tag, und das Ganze wird in ein <li class="cards__item"> eingebettet.
     """
     output = ""
     for animal in data:
+        output += '<li class="cards__item">'
         if 'name' in animal:
-            output += f"Name: {animal['name']}\n"
-        if 'diet' in animal:
-            output += f"Diet: {animal['diet']}\n"
+            output += f"Name: {animal['name']}<br/>\n"
+        if 'characteristics' in animal:
+            if 'diet' in animal['characteristics']:
+                output += f"Diet: {animal['characteristics']['diet']}<br/>\n"
+            if 'type' in animal['characteristics']:
+                output += f"Type: {animal['characteristics']['type']}<br/>\n"
         if 'locations' in animal and isinstance(animal['locations'], list) and animal['locations']:
-            output += f"Location: {animal['locations'][0]}\n"
-        if 'type' in animal:
-            output += f"Type: {animal['type']}\n"
-        output += "\n"  # Leerzeile als Trenner
+            output += f"Location: {animal['locations'][0]}<br/>\n"
+        output += '</li>\n'
     return output
 
 
@@ -63,14 +71,16 @@ def create_html(template_path, animals_info, output_path):
 
 
 if __name__ == '__main__':
-    # Schritt 1: JSON-Daten laden und in der Konsole ausgeben
+    # JSON-Daten laden
     animals_data = load_data('animals_data.json')
+
+    # Optionale Konsolenausgabe der rohen Daten
     print_animal_info(animals_data)
 
-    # Schritt 2: Tiere-Informationen als String generieren
+    # HTML-Code für jedes Tier generieren (als "card" bzw. Listenelement)
     animals_info = generate_animals_output(animals_data)
 
-    # Schritt 3: HTML-Template laden, den Platzhalter ersetzen und in animals.html schreiben
+    # Template einlesen, Platzhalter ersetzen und neue HTML-Datei erzeugen
     create_html("animals_template.html", animals_info, "animals.html")
 
     print("Die Datei animals.html wurde erfolgreich erstellt.")
