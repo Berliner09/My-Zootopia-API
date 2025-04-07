@@ -1,0 +1,18 @@
+# Byte-compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtuelle Umgebung
+.venv/
+
+# Umgebungsvariablen (z.B. API-Key)
+.env
+
+# Editor- und IDE-spezifische Dateien
+.vscode/
+.idea/
+
+# Betriebssystem-spezifische Dateien
+.DS_Store
+Thumbs.db

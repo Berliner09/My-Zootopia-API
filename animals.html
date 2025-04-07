@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Animal Repository</title> <style>
+        /* Farben direkt definiert, da @-Variablen kein Standard-CSS sind */
+        html {
+          background-color: #ffe9e9; /* Ein leichter Rosa-Ton */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 40pt;
+            font-weight: normal;
+            color: #444444; /* Dunkelgrau */
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        body {
+          /* Moderne Schriftarten mit Fallbacks */
+          font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          letter-spacing: 0;
+          padding: 1rem;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          /* -moz-font-feature-settings: "liga" on; */ /* Nicht weit unterstützt, oft unnötig */
+          max-width: 900px; /* Responsiver als feste Breite */
+          margin: auto; /* Zentriert den Body */
+          color: #444444; /* Standardtextfarbe dunkelgrau */
+        }
+
+        .cards {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: grid; /* Modernes Layout mit Grid */
+          /* Erzeugt Spalten, die mindestens 300px breit sind,
+             aber flexibel wachsen, um den Platz zu füllen */
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px; /* Abstand zwischen den Karten */
+          margin-top: 40px;
+        }
+
+        .cards__item {
+          background-color: white;
+          border-radius: 0.25rem; /* 4px */
+          box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2); /* Subtilerer Schatten */
+          overflow: hidden; /* Stellt sicher, dass nichts überläuft */
+          padding: 1.5rem; /* Etwas mehr Innenabstand */
+          /* margin: 50px;  <- Entfernt, da gap vom Grid übernommen wird */
+          display: flex; /* Flexbox für interne Ausrichtung */
+          flex-direction: column; /* Elemente untereinander */
+        }
+
+        .card__title {
+          color: #696969; /* Grau */
+          font-size: 1.25rem; /* 20px */
+          font-weight: 600; /* Etwas dicker für bessere Lesbarkeit */
+          letter-spacing: 1px; /* Weniger aggressiv */
+          text-transform: uppercase;
+          margin-bottom: 0.75rem; /* Abstand nach dem Titel */
+        }
+
+        .card__text {
+          flex: 1 1 auto; /* Sorgt dafür, dass der Textbereich wächst */
+          font-size: 0.95rem; /* 15.2px */
+          line-height: 1.8; /* Besserer Zeilenabstand */
+          margin-bottom: 0; /* Kein unterer Margin mehr nötig */
+          color: #444444; /* Textfarbe */
+        }
+
+        .card__text strong {
+          color: #444444; /* Hervorhebung etwas dunkler */
+        }
+
+        /* Stil für die Fehlermeldung, falls keine Tiere gefunden werden */
+        h2 {
+            text-align: center;
+            color: #999999; /* Grau */
+            font-size: 1.5rem;
+            margin-top: 50px;
+        }
+
+        </style>
+    </head>
+    <body>
+        <h1>My Animal Repository</h1>
+        <ul class="cards">
+                        <li class="cards__item">
+              <div class="card__title">African Wild Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Carnivore<br/>
+                <strong>Location:</strong> Africa<br/>
+                <strong>Lifespan:</strong> 10 - 13 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">American Bulldog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> North-America<br/>
+                <strong>Type:</strong> Mastiff<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">American Dog Tick</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> North-America<br/>
+                <strong>Type:</strong> Arachnid<br/>
+                <strong>Lifespan:</strong> 1-5 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">American Eskimo Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 13 - 15 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Anatolian Shepherd Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 11-13 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Appenzeller Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 12 – 14 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Australian Bulldog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Oceania<br/>
+                <strong>Lifespan:</strong> 12 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Australian Cattle Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Oceania<br/>
+                <strong>Lifespan:</strong> 13-15 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Australian Kelpie Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Oceania<br/>
+                <strong>Lifespan:</strong> 10 to 13 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Basenji Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Africa<br/>
+                <strong>Lifespan:</strong> 12-14 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Bernese Mountain Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Blue Lacy Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> North-America<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Bolognese Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Boxer Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Brown Dog Tick</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Africa<br/>
+                <strong>Type:</strong> Arachnid<br/>
+                <strong>Lifespan:</strong> 3-18 months<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Bulldog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Canaan Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Asia<br/>
+                <strong>Lifespan:</strong> 15 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Canadian Eskimo Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> North-America<br/>
+                <strong>Lifespan:</strong> 10 to 15 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Carolina Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> North-America<br/>
+                <strong>Lifespan:</strong> 19 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Catalan Sheepdog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 13 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Chinese Crested Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Asia<br/>
+                <strong>Lifespan:</strong> 13 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Czechoslovakian Wolfdog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Type:</strong> mammal<br/>
+                <strong>Lifespan:</strong> 10-15 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Dog Tick</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Africa<br/>
+                <strong>Type:</strong> Arachnid<br/>
+                <strong>Lifespan:</strong> 2-3 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Dogo Argentino</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> South-America<br/>
+                <strong>Lifespan:</strong> 13 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Dogue De Bordeaux</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 8 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">English Bulldog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 8-10 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Entlebucher Mountain Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 12 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Eskimo Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> North-America<br/>
+                <strong>Lifespan:</strong> 14 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Estrela Mountain Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 16 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Formosan Mountain Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Asia<br/>
+                <strong>Type:</strong> mammal<br/>
+                <strong>Lifespan:</strong> 10-13 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">French Bulldog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 10 to 12 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Greater Swiss Mountain Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 12 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Greenland Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> North-America<br/>
+                <strong>Lifespan:</strong> 12 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Icelandic Sheepdog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Type:</strong> mammal<br/>
+                <strong>Lifespan:</strong> 12-14 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Moscow Watchdog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Eurasia<br/>
+                <strong>Lifespan:</strong> 9 to 11 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Northern Inuit Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Carnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 12 to 15 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Old English Sheepdog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 12 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Polish Lowland Sheepdog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+                <strong>Lifespan:</strong> 12 to 14 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Prairie Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Central-America<br/>
+                <strong>Type:</strong> Mammal<br/>
+                <strong>Lifespan:</strong> 3-4 years on average<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Raccoon Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Carnivore<br/>
+                <strong>Location:</strong> Asia<br/>
+                <strong>Type:</strong> Mammal<br/>
+                <strong>Lifespan:</strong> 3 - 8 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Russian Bear Dog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Eurasia<br/>
+                <strong>Lifespan:</strong> 10 to 12 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Saarloos Wolfdog</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Omnivore<br/>
+                <strong>Location:</strong> Europe<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Spiny Dogfish</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Carnivore<br/>
+                <strong>Location:</strong> Ocean<br/>
+                <strong>Lifespan:</strong> Average of 20 to 24 years, but can live up to 50 years<br/>
+              </p>
+            </li>
+            <li class="cards__item">
+              <div class="card__title">Viper shark (dogfish)</div>
+              <p class="card__text">
+                <strong>Diet:</strong> Carnivore<br/>
+                <strong>Location:</strong> Ocean<br/>
+                <strong>Type:</strong> Fish<br/>
+              </p>
+            </li>
+
+        </ul>
+    </body>
+</html>
